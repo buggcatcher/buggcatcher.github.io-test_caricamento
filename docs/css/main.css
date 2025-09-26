@@ -424,5 +424,34 @@
   vertical-align: -0.15em;
 }
 
+/* Progressive Image Loading */
+.lqip-loading {
+  filter: blur(20px);
+  transition: filter 0.5s ease;
+}
 
-  
+.hd-loaded {
+  filter: blur(0);
+}
+
+.hd-error {
+  filter: blur(0);
+  opacity: 0.7;
+}
+
+/* Miglioramento performance per immagini */
+img[loading="lazy"] {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+img[loading="lazy"].loaded {
+  opacity: 1;
+}
+
+/* Fallback per browser senza intersection observer */
+.no-js img[data-src] {
+  display: none;
+}
+
+
