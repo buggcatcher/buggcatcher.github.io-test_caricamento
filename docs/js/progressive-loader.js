@@ -99,8 +99,14 @@ class ProgressiveImageLoader {
     }
     
     img.onload = () => {
-      // Ripristina l'immagine originale dal CSS invece di impostare dinamicamente
-      element.style.backgroundImage = '';
+      // Imposta esplicitamente l'immagine HD con tutte le proprietà CSS
+      element.style.backgroundImage = `url(${hdSrc})`;
+      element.style.backgroundRepeat = 'no-repeat';
+      element.style.backgroundPosition = 'center center';
+      element.style.backgroundSize = 'cover';
+      
+      // Rimuovi completamente il filtro invece di impostarlo a none
+      element.style.filter = '';
       element.classList.remove('lqip-loading');
       element.classList.add('hd-loaded');
     };
@@ -108,6 +114,7 @@ class ProgressiveImageLoader {
     img.onerror = () => {
       console.warn('Failed to load HD image:', hdSrc);
       element.style.backgroundImage = '';
+      element.style.filter = '';
       element.classList.remove('lqip-loading');
       element.classList.add('hd-error');
     };
